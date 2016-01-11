@@ -1,1 +1,1 @@
-web: gunicorn voyafuzion:app --log-file=-
+web: gunicorn app:app --log-file=-
