@@ -17,6 +17,7 @@ def get_availability(post_id):
     start_date = request.args.get('start_date', '')
     end_date = request.args.get('end_date', '')
     num_guests = request.args.get('num_guests', 1)
+    print start_date, end_date, num_guests
     available = True
     check_results = dict()
     for name, func in CHECKS.iteritems():
@@ -69,12 +70,12 @@ CHECKS = dict(
 
 
 def _get_vrbo_id(post_id):
-    return redis.hget('listings:'+post_id, 'vrbo')
+    return redis.hget('listings:'+str(post_id), 'vrbo')
     # return 721736
 
 
 def _get_airbnb_id(post_id):
-    return redis.hget('listings:'+post_id, 'airbnb')
+    return redis.hget('listings:'+str(post_id), 'airbnb')
     # return 6591108
 
 
@@ -112,5 +113,3 @@ def _get_vrbo_dates(vrbo_id, start_date, end_date, num_of_guests):
             return False
     return True
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
