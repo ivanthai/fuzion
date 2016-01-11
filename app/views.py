@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from app import app
+from flask import request, jsonify
 from requests import get
 import re
 import json
 from datetime import datetime
-app = Flask(__name__)
+from app import redis
 
 
 @app.route('/')
@@ -68,6 +69,7 @@ CHECKS = dict(
 
 
 def _get_vrbo_id(post_id):
+    redis.get(post_id)
     return 721736
 
 
