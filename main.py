@@ -108,6 +108,3 @@ def _get_vrbo_dates(vrbo_id, start_date, end_date, num_of_guests):
         if availability_str[x] == 'N':
             return False
     return True
-
-if __name__ == '__main__':
-    app.run(debug=True)
