@@ -21,6 +21,8 @@ def get_availability(post_id):
     available = True
     check_results = dict()
     for name, func in CHECKS.iteritems():
+        if not ID_CHECKS[name](post_id):
+            continue
         resp = func(post_id)
         if not json.loads(resp.data)['available']:
             available = False
@@ -62,11 +64,6 @@ def get_airbnb_availablility(post_id):
         available=resp,
         numOfGuests=num_guests
     )
-
-CHECKS = dict(
-    siteVrbo=get_vrbo_availablility,
-    siteAirbnb=get_airbnb_availablility
-)
 
 
 def _get_vrbo_id(post_id):
@@ -113,3 +110,12 @@ def _get_vrbo_dates(vrbo_id, start_date, end_date, num_of_guests):
             return False
     return True
 
+CHECKS = dict(
+    siteVrbo=get_vrbo_availablility,
+    siteAirbnb=get_airbnb_availablility
+)
+
+ID_CHECKS = dict(
+    siteVrbo=_get_vrbo_id,
+    siteAirbnb=_get_airbnb_id
+)
