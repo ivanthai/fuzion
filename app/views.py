@@ -69,11 +69,13 @@ CHECKS = dict(
 
 
 def _get_vrbo_id(post_id):
-    return 721736
+    return redis.hget('listings:'+post_id, 'vrbo')
+    # return 721736
 
 
 def _get_airbnb_id(post_id):
-    return 6591108
+    return redis.hget('listings:'+post_id, 'airbnb')
+    # return 6591108
 
 
 def _get_airbnb_dates(airbnb_id, start_date, end_date, num_of_guests):
