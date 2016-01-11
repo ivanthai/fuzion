@@ -4,7 +4,7 @@ from requests import get
 import re
 import json
 from datetime import datetime
-# from app import redis
+from app import redis
 
 
 @app.route('/')
@@ -69,7 +69,6 @@ CHECKS = dict(
 
 
 def _get_vrbo_id(post_id):
-    # redis.get(post_id)
     return 721736
 
 
